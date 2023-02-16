@@ -1,0 +1,117 @@
+@import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+
+:root {
+  --color-primary: #007bff;
+  --color-black: #222831;
+  --color-lightblue: #00adb5;
+  --color-darkblue: #393e46;
+  --color-lightgrey: #eeeeee;
+  --color-white: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#container {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-areas:
+    "nav div main"
+    "nav div main"
+    "nav footer footer";
+  grid-template-rows: 6fr 6fr 40px;
+  grid-template-columns: 1fr 1fr 5fr;
+}
+.bi {
+  font-size: 24px;
+}
+
+#sidebar {
+  grid-area: nav;
+  background-color: var(--color-black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#dashboard {
+  grid-area: div;
+  background-color: var(--color-lightgrey);
+  padding: 5px;
+  padding-top: 52%;
+}
+#content {
+  grid-area: main;
+  background-color: var(--color-white);
+}
+
+#container > footer {
+  grid-area: footer;
+  background-color: var(--color-black);
+}
+
+#logo {
+  margin-bottom: 40px;
+  font-size: 36px;
+  text-align: center;
+  color: var(--color-white);
+  font-family: "Monoton", cursive;
+}
+#logo span {
+  background: var(--color-primary); /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-black),
+    var(--color-white),
+    var(--color-black),
+    var(--color-primary)
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    var(--color-primary),
+    var(--color-black),
+    var(--color-lightblue),
+    var(--color-black),
+    var(--color-primary)
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#sidebar > ul > li {
+  width: 100%;
+}
+#logout {
+  margin-bottom: 40px;
+}
+#logout button {
+  border-radius: 0;
+}
+.myActive {
+  background-color: var(--color-primary);
+  color: white;
+}
+#sidebar a:hover {
+  background-color: #062648d2;
+  color: white;
+  font-size: 1.1rem;
+}
+#sidebar i {
+  margin-right: 10px;
+}
+#userDashboard,
+#equipementDashboard {
+  display: none;
+}
+#dashboard .nav-link {
+  margin-bottom: 10px;
+  color: var(--color-darkblue);
+}
+.nav-pills > a.active,
+.nav-pills > a:hover {
+  color: var(--color-lightgrey) !important;
+  background-color: var(--color-lightblue) !important;
+}
+
+
+
