@@ -1,3 +1,17 @@
+<?php
+
+require "model/users/user.crud.php";
+require "model/db/singletonDB.php";
+
+
+session_start();
+
+$allUsers = UserCRUD::getAllUsers($conn);
+if (!$allUsers) {
+    echo "Greska kod upita.";
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Jquery,popper,bootsrap js -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -24,14 +38,25 @@
 
 <body class="bg-light">
 
-
     <!-- CONTAINER -->
     <div id="container">
-        <!-- TO DO
-            Different include depending on logged user TYPE 
-        -->
-        <?php include_once('view/administrator/administrator.view.php') ?>
+        <?php
 
+        if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
+            $type = $_SESSION['loggedUser']->getType();
+            if ($type == 'administrator') {
+                include_once('view/administrator/administrator.view.php');
+            } else if ($type == 'operator') {
+                include_once('view/operator/operator.view.php');
+            } else if ($type == 'technician') {
+                include_once('view/technician/technician.view.php');
+            } else {
+                header('Location:index.php?msg=invalidUser');
+            }
+        } else {
+            header('Location:index.php?msg=userNotLogged');
+        }
+        ?>
 
         <!-- FOOTER -->
         <footer>
@@ -43,7 +68,7 @@
 
     <!-- My JS -->
     <script src="js/main.js"></script>
-    <script src="js/administrator.js"></script>
+    <script src="js/ajax/ajax.js"></script>
 </body>
 
 </html>

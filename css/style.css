@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Monoton&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
 
 :root {
   --color-primary: #007bff;
@@ -7,6 +8,10 @@
   --color-darkblue: #393e46;
   --color-lightgrey: #eeeeee;
   --color-white: #ffffff;
+
+  --font-teko: 'Roboto Condensed', sans-serif;
+
+  --font-monoton:"Monoton", cursive;
 }
 * {
   margin: 0;
@@ -15,6 +20,8 @@
 }
 
 #container {
+  font-size: 16px;
+  font-family: var(--font-teko);
   display: grid;
   width: 100vw;
   height: 100vh;
@@ -54,15 +61,15 @@
 
 #logo {
   margin-bottom: 40px;
-  font-size: 36px;
+  font-size: 2.2rem;
   text-align: center;
   color: var(--color-white);
-  font-family: "Monoton", cursive;
+  font-family: var(--font-monoton);
 }
 #logo span {
   background: var(--color-primary); /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right,
+    to bottom,
     var(--color-primary),
     var(--color-black),
     var(--color-white),
@@ -70,10 +77,14 @@
     var(--color-primary)
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right,
+    to bottom,
     var(--color-primary),
     var(--color-black),
+    var(--color-black),
     var(--color-lightblue),
+    var(--color-lightblue),
+    var(--color-lightblue),
+    var(--color-black),
     var(--color-black),
     var(--color-primary)
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -100,7 +111,8 @@
   margin-right: 10px;
 }
 #userDashboard,
-#equipementDashboard {
+#equipementDashboard,
+#reportDashboard {
   display: none;
 }
 #dashboard .nav-link {

@@ -6,7 +6,7 @@
              <a href="#" class="nav-link myActive"><i class="bi bi-person-fill"></i>Profile</a>
          </li>
          <li class="nav-item">
-             <a href="#users" class="nav-link"><i class="bi bi-people-fill"></i>Users</a>
+             <a href="#" class="nav-link"><i class="bi bi-clipboard-fill"></i></i>Reports</a>
          </li>
          <li class="nav-item">
              <a href="#" class="nav-link"><i class="bi bi-wrench-adjustable-circle-fill"></i>Equipement</a>
@@ -30,11 +30,11 @@
          </div>
      </div>
 
-     <div class="row" id="userDashboard">
+     <div class="row" id="reportDashboard">
          <div class="col">
              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                 <a class="nav-link" data-toggle="pill" href="#listOfUsers" role="tab">List of Users</a>
-                 <a class="nav-link" data-toggle="pill" href="#addUser">Add User</a>
+                 <a class="nav-link" data-toggle="pill" href="#listOfReported" role="tab">List of Reported Defects</a>
+                 <a class="nav-link" data-toggle="pill" href="#listOfFixed">List of Fixed Defects</a>
                  <a class="nav-link" data-toggle="pill" href="#user1">Something</a>
                  <a class="nav-link" data-toggle="pill" href="#user2">Something else</a>
              </div>
@@ -75,12 +75,8 @@
              <div class="tab-pane fade" id="myProfile" role="tabpanel"> PROFILE EDIT SHOW</div>
 
              <!-- USERS CONTENT TABS -->
-             <div class="tab-pane fade show" id="listOfUsers" role="tabpanel">
-                 <?php include_once('view/administrator/users.read.php'); ?>
-             </div>
-             <div class="tab-pane fade" id="addUser" role="tabpanel">
-                 <?php include_once('view/administrator/users.add.php'); ?>
-             </div>
+             <div class="tab-pane fade show" id="listOfReported" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut laborum incidunt sunt eum inventore, ipsa possimus dolor nostrum, necessitatibus dolores eaque itaque eos saepe aspernatur tempora autem mollitia amet et.</div>
+             <div class="tab-pane fade" id="listOfFixed" role="tabpanel"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Et repellendus nobis numquam assumenda minus magnam delectus, sint perspiciatis quaerat totam laborum rem expedita harum blanditiis repellat eos doloribus tempora enim.</div>
              <div class="tab-pane fade" id="user1" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
              <div class="tab-pane fade" id="user2" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 
@@ -93,6 +89,4 @@
          </div>
      </div>
  </main>
-
-
- <script src="js/administrator.js"></script>
+ <script src="js/technician.js"></script>
