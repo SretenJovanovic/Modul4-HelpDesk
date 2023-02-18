@@ -75,8 +75,13 @@
              <div class="tab-pane fade" id="myProfile" role="tabpanel"> PROFILE EDIT SHOW</div>
 
              <!-- USERS CONTENT TABS -->
-             <div class="tab-pane fade show" id="listOfReported" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut laborum incidunt sunt eum inventore, ipsa possimus dolor nostrum, necessitatibus dolores eaque itaque eos saepe aspernatur tempora autem mollitia amet et.</div>
-             <div class="tab-pane fade" id="listOfFixed" role="tabpanel"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Et repellendus nobis numquam assumenda minus magnam delectus, sint perspiciatis quaerat totam laborum rem expedita harum blanditiis repellat eos doloribus tempora enim.</div>
+             <div class="tab-pane fade show" id="listOfReported" role="tabpanel">
+                <h2>List of Reported Defects</h2>
+             <?php include_once('listOfReported.view.php'); ?>
+             </div>
+             <div class="tab-pane fade" id="listOfFixed" role="tabpanel">
+                <h2>List of Fixed Defects</h2>
+             <?php include_once('listOfFixed.view.php'); ?></div>
              <div class="tab-pane fade" id="user1" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
              <div class="tab-pane fade" id="user2" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 

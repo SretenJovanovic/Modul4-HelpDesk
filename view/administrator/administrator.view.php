@@ -85,8 +85,12 @@
              <div class="tab-pane fade" id="user2" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 
              <!-- EQUIPEMENT CONTENT TABS -->
-             <div class="tab-pane fade show" id="listOfEquipement" role="tabpanel">Equipement LIST</div>
-             <div class="tab-pane fade" id="addEquipement" role="tabpanel"> ADD EQUIPEMENT</div>
+             <div class="tab-pane fade show" id="listOfEquipement" role="tabpanel">
+             <?php include_once('view/administrator/equipement.read.php'); ?>
+             </div>
+             <div class="tab-pane fade" id="addEquipement" role="tabpanel"> 
+             <?php include_once('view/administrator/equipement.add.php'); ?>
+             </div>
              <div class="tab-pane fade" id="equipement1" role="tabpanel">EQUIPEMENT SOMETHING</div>
              <div class="tab-pane fade" id="equipement2" role="tabpanel">EQUIPEMENT SOMETHING ELSE</div>
 

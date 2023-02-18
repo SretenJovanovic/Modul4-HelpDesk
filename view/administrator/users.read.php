@@ -13,7 +13,14 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($allUsers as $user) :
+        <?php if (!$allUsers || $allUsers === null || $allUsers[0] == 'There is no users') {
+        ?>
+            <tr class="table-secondary">
+                <td colspan="7"><?php echo $allUsers[0];?></td>
+            </tr>
+            <?php
+        } else {
+        foreach ($allUsers as $user) :
             if (($user->getType() !== 'administrator') || ($user->getId() != '1')) :
         ?>
                 <tr class="table-secondary">
@@ -45,7 +52,8 @@
                 </tr>
 
         <?php endif;
-        endforeach; ?>
+        endforeach; 
+    } ?>
 
     </tbody>
 </table>

@@ -6,9 +6,11 @@ class UserCRUD
     {
         $query = "SELECT * FROM users;";
         $result = $conn->query($query);
+        $arrayOfUsers=[];
         if ($result->num_rows === 0) {
-            return $result = 'There is no users';
-        }
+            
+            return;
+        }else 
         while ($red = $result->fetch_assoc()) {
             $arrayOfUsers[] = new User(...$red);
         }

@@ -25,6 +25,53 @@ $(document).ready(function () {
     $("#userDashboard").show();
     $('#v-pills-tab a[href="#listOfUsers"]').tab("show");
   }
+  if (
+    location == "home.php?msg=equipementUpdated" ||
+    location == "home.php?msg=equipementDeleted" ||
+    location == "home.php?msg=equipementInserted"
+  ) {
+    tabs.removeClass("myActive");
+    tabs[2].classList.add("myActive");
+
+    $("#userDashboard").hide();
+    $("#equipementDashboard").hide();
+    $("#profileDashboard").hide();
+    $("#profileDashboard a").removeClass("active");
+    $("#userDashboard a").removeClass("active");
+    $("#equipementDashboard a").removeClass("active");
+    $("#equipementDashboard").show();
+    $('#v-pills-tab a[href="#listOfEquipement"]').tab("show");
+  }
+  if (location == "home.php?msg=reportInserted") {
+    tabs.removeClass("myActive");
+    tabs[1].classList.add("myActive");
+  
+    $("#profileDashboard").hide();
+    $("#reportDashboard").hide();
+    $("#equipementDashboard").hide();
+    
+    $("#profileDashboard a").removeClass("active");
+    $("#reportDashboard a").removeClass("active");
+    $("#equipementDashboard a").removeClass("active");
+
+    $("#reportDashboard").show();
+    $('#v-pills-tab a[href="#listOfReports"]').tab("show");
+  }
+  if (location == "home.php?msg=reportStatusChanged") {
+    tabs.removeClass("myActive");
+    tabs[1].classList.add("myActive");
+  
+    $("#profileDashboard").hide();
+    $("#reportDashboard").hide();
+    $("#equipementDashboard").hide();
+    
+    $("#profileDashboard a").removeClass("active");
+    $("#reportDashboard a").removeClass("active");
+    $("#equipementDashboard a").removeClass("active");
+
+    $("#reportDashboard").show();
+    $('#v-pills-tab a[href="#listOfFixed"]').tab("show");
+  }
   //  else if (location == 'home.php?msg=userAddedSuccessfully' ||
   //     location == 'home.php?msg=userDeleted' ||
   //     location == 'home.php?msg=userUpdated'
