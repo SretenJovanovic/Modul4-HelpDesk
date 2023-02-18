@@ -58,6 +58,7 @@ if (!$reports) {
         $allReports[] = new FailureReport($report['ID'], $user, $equipement, $report['description'],$report['report_date'], $report['fixed_date'],$status); 
     
     }
+    
 }
 
 

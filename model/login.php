@@ -6,8 +6,13 @@ class Login
     {
         $query = "SELECT * FROM users WHERE email='$username_email'OR username = '$username_email' AND password='$password' LIMIT 1;";
         $result =  $conn->query($query);
-        $row = $result->fetch_assoc();
-        $row = new User(...$row);
-        return $row;
+        if ($result->num_rows === 0) {
+            return null;
+        }else {
+
+            $row = $result->fetch_assoc();
+            $row = new User(...$row);
+            return $row;
+        }
     }
 }

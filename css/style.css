@@ -135,3 +135,26 @@
   border-right: 5px solid var(--color-black);
   letter-spacing: 2px;
 }
+
+#password:invalid,
+#email_username:invalid {
+  border: 2px solid rgb(250, 2, 2);
+  animation: shake 0.2s 2;
+}
+#password:focus,
+#email_username:focus {
+  background-color: rgb(225, 222, 222);
+  box-shadow: none;
+}
+
+@keyframes shake {
+  25% {
+    translate: 6px 0;
+  }
+  50% {
+    translate: -6px 0;
+  }
+  75% {
+    translate: 6px 0;
+  }
+}

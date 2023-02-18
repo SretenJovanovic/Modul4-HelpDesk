@@ -1,3 +1,4 @@
+
 // Request after submiting add user form
 $("#registerUserForm").submit(function (e) {
   e.preventDefault();
