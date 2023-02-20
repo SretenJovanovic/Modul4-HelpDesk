@@ -1,4 +1,4 @@
-<h2>User List</h2>
+<h3>User List</h3>
 <table class="table table-sm mb-5">
     <thead class="thead-dark">
         <tr>

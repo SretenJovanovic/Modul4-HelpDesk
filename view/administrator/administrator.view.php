@@ -1,3 +1,4 @@
+
  <!-- NAVIGATION SIDEBAR -->
  <nav id="sidebar">
      <ul class="nav mb-3 mt-3">
@@ -86,10 +87,10 @@
 
              <!-- EQUIPEMENT CONTENT TABS -->
              <div class="tab-pane fade show" id="listOfEquipement" role="tabpanel">
-             <?php include_once('view/administrator/equipement.read.php'); ?>
+                 <?php include_once('view/administrator/equipement.read.php'); ?>
              </div>
-             <div class="tab-pane fade" id="addEquipement" role="tabpanel"> 
-             <?php include_once('view/administrator/equipement.add.php'); ?>
+             <div class="tab-pane fade" id="addEquipement" role="tabpanel">
+                 <?php include_once('view/administrator/equipement.add.php'); ?>
              </div>
              <div class="tab-pane fade" id="equipement1" role="tabpanel">EQUIPEMENT SOMETHING</div>
              <div class="tab-pane fade" id="equipement2" role="tabpanel">EQUIPEMENT SOMETHING ELSE</div>

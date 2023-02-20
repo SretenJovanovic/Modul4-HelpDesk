@@ -12,5 +12,5 @@ interface Report {
     public function getStatus();
     public function setStatus();
     public function getFixedDate();
-    public function setFixedDate();
+    public function setFixedDate($fixedDate);
 }

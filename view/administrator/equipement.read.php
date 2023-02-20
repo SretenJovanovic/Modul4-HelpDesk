@@ -1,4 +1,4 @@
-<h2>Equipement List</h2>
+<h3>Equipement List</h3>
 <table class="table table-sm">
     <thead class="thead-dark">
         <tr>

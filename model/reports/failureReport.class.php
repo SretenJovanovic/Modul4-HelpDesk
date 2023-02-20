@@ -12,7 +12,7 @@ class FailureReport implements Report
     private $status = false;
     private $fixedDate;
 
-    public function __construct($id, User $user, Equipement $equipement, $description,$reportDate,$fixedDate=null,$status)
+    public function __construct($id, User $user, Equipement $equipement, $description, $reportDate, $fixedDate = null, $status)
     {
         $this->id = $id;
         $this->user = $user;
@@ -56,7 +56,9 @@ class FailureReport implements Report
     }
     public function getReportDate()
     {
-        return $this->reportDate;
+        $orgDate = $this->reportDate;
+        $newDate = date("d-m-Y h:i:s", strtotime($orgDate));
+        return $newDate;
     }
     public function getStatus()
     {
@@ -68,11 +70,12 @@ class FailureReport implements Report
     }
     public function getFixedDate()
     {
-        return $this->fixedDate;
+        $orgDate = $this->fixedDate;
+        $newDate = date("d-m-Y h:i:s", strtotime($orgDate));
+        return $newDate;
     }
-    public function setFixedDate()
+    public function setFixedDate($fixedDate)
     {
-        return $this->fixedDate = date_timestamp_get(date_create());
+        return $this->fixedDate = $fixedDate;
     }
-
 }

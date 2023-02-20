@@ -1,6 +1,4 @@
-<h2>Add Equipement</h2>
-
-
+<h3>Add Equipement</h3>
 <form action="#" method="POST" id="registerEquipementForm">
     <div class="form-row">
         <div class="form-group col-md-4">

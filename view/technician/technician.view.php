@@ -1,3 +1,5 @@
+
+ 
  <!-- NAVIGATION SIDEBAR -->
  <nav id="sidebar">
      <ul class="nav mb-3 mt-3">
@@ -18,7 +20,6 @@
          </form>
      </div>
  </nav>
-
  <!-- DASHBOARD MENU -->
  <div id="dashboard">
      <div class="row" id="profileDashboard">
@@ -76,12 +77,13 @@
 
              <!-- USERS CONTENT TABS -->
              <div class="tab-pane fade show" id="listOfReported" role="tabpanel">
-                <h2>List of Reported Defects</h2>
-             <?php include_once('listOfReported.view.php'); ?>
+                 <h3>List of Reported Defects</h3>
+                 <?php include_once('listOfReported.view.php'); ?>
              </div>
              <div class="tab-pane fade" id="listOfFixed" role="tabpanel">
-                <h2>List of Fixed Defects</h2>
-             <?php include_once('listOfFixed.view.php'); ?></div>
+                 <h3>List of Fixed Defects</h3>
+                 <?php include_once('listOfFixed.view.php'); ?>
+             </div>
              <div class="tab-pane fade" id="user1" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
              <div class="tab-pane fade" id="user2" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
 

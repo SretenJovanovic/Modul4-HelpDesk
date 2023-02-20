@@ -1,3 +1,4 @@
+
  <!-- NAVIGATION SIDEBAR -->
  <nav id="sidebar">
      <ul class="nav mb-3 mt-3">
@@ -76,11 +77,11 @@
 
              <!-- RERORTS CONTENT TABS -->
              <div class="tab-pane fade show" id="listOfReports" role="tabpanel">
-                <h1>List Of Reports</h1>
+                <h3>List Of Reports</h3>
              <?php include_once('view/operator/listOfReports.view.php'); ?>
              </div>
              <div class="tab-pane fade" id="addReport" role="tabpanel"> 
-             <h2>Add Report</h2>
+             <h3>Add Report</h3>
              <?php include_once('view/operator/failureReport.view.php'); ?>
              </div>
              <div class="tab-pane fade" id="user1" role="tabpanel">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>

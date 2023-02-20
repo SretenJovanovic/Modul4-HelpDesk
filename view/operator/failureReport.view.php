@@ -1,5 +1,4 @@
 <form action="#" method="POST" id="addReportForm">
-    <h3>Add report</h3>
     <div class="form-row">
         <div class="form-group col-md-1">
             <label for="operatorID">Operator</label>

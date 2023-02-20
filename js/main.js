@@ -1,17 +1,34 @@
 $(document).ready(function () {
-  //Dodavanje vrednosti u edit user modal
 
-  var location = document.location.href.substring(
-    document.location.href.lastIndexOf("/") + 1,
-    document.location.href.length
-  );
+  //Dodavanje vrednosti u edit user modal
+  var url_string = window.location.href; // www.test.com?filename=test
+  var url = new URL(url_string);
+
+    
+  // fetching get values from url
+
+  var paramValueMsg = url.searchParams.get("msg");
+  var paramValuePage = url.searchParams.get("page");
+  var paramValueType = url.searchParams.get("type");
+  var paramValueStatus = url.searchParams.get("status");
+  
+  const regEx = /^\d*(\.\d+)?$/;
+  // const regExFixed= /[a-z]*[1-9]/g;
+  if (paramValuePage == null) {
+    paramValuePage = "";
+  }
+  if (paramValuePage == null) {
+    paramValuePage = "";
+  }
+  if (paramValueType == null) {
+    paramValueType = "";
+  }
   var tabs = $("#sidebar ul li a");
-  var nav = $(".nav-pills a");
 
   if (
-    location == "home.php?msg=userUpdated" ||
-    location == "home.php?msg=userDeleted" ||
-    location == "home.php?msg=userInserted"
+    paramValueMsg == "userUpdated" ||
+    paramValueMsg == "userDeleted" ||
+    paramValueMsg == "userInserted"
   ) {
     tabs.removeClass("myActive");
     tabs[1].classList.add("myActive");
@@ -26,9 +43,9 @@ $(document).ready(function () {
     $('#v-pills-tab a[href="#listOfUsers"]').tab("show");
   }
   if (
-    location == "home.php?msg=equipementUpdated" ||
-    location == "home.php?msg=equipementDeleted" ||
-    location == "home.php?msg=equipementInserted"
+    paramValueMsg == "equipementUpdated" ||
+    paramValueMsg == "equipementDeleted" ||
+    paramValueMsg == "equipementInserted"
   ) {
     tabs.removeClass("myActive");
     tabs[2].classList.add("myActive");
@@ -42,14 +59,17 @@ $(document).ready(function () {
     $("#equipementDashboard").show();
     $('#v-pills-tab a[href="#listOfEquipement"]').tab("show");
   }
-  if (location == "home.php?msg=reportInserted") {
+  if (
+    paramValueMsg == "reportInserted" ||
+    (paramValuePage.match(regEx) && paramValueType == "operator")
+  ) {
     tabs.removeClass("myActive");
     tabs[1].classList.add("myActive");
-  
+
     $("#profileDashboard").hide();
     $("#reportDashboard").hide();
     $("#equipementDashboard").hide();
-    
+
     $("#profileDashboard a").removeClass("active");
     $("#reportDashboard a").removeClass("active");
     $("#equipementDashboard a").removeClass("active");
@@ -57,20 +77,44 @@ $(document).ready(function () {
     $("#reportDashboard").show();
     $('#v-pills-tab a[href="#listOfReports"]').tab("show");
   }
-  if (location == "home.php?msg=reportStatusChanged") {
+  if (
+    paramValueMsg == "reportStatusChanged" ||
+    (paramValueStatus == "fixed" &&
+      paramValuePage.match(regEx) &&
+      paramValueType == "technician")
+  ) {
     tabs.removeClass("myActive");
     tabs[1].classList.add("myActive");
-  
+
     $("#profileDashboard").hide();
     $("#reportDashboard").hide();
     $("#equipementDashboard").hide();
-    
+
     $("#profileDashboard a").removeClass("active");
     $("#reportDashboard a").removeClass("active");
     $("#equipementDashboard a").removeClass("active");
 
     $("#reportDashboard").show();
     $('#v-pills-tab a[href="#listOfFixed"]').tab("show");
+  }
+  if (
+    paramValueStatus == "reported" &&
+    paramValuePage.match(regEx) &&
+    paramValueType == "technician"
+  ) {
+    tabs.removeClass("myActive");
+    tabs[1].classList.add("myActive");
+
+    $("#profileDashboard").hide();
+    $("#reportDashboard").hide();
+    $("#equipementDashboard").hide();
+
+    $("#profileDashboard a").removeClass("active");
+    $("#reportDashboard a").removeClass("active");
+    $("#equipementDashboard a").removeClass("active");
+
+    $("#reportDashboard").show();
+    $('#v-pills-tab a[href="#listOfReported"]').tab("show");
   }
   //  else if (location == 'home.php?msg=userAddedSuccessfully' ||
   //     location == 'home.php?msg=userDeleted' ||

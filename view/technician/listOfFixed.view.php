@@ -1,6 +1,7 @@
-<table  class="table table-sm">
-  <thead class="thead-dark">
+<table class="table table-sm">
+    <thead class="thead-dark">
         <tr>
+            <th>ID</th>
             <th>Report ID</th>
             <th>Operator ID</th>
             <th>Operator Name</th>
@@ -14,10 +15,16 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($allReports as $failureReport) :
-            if ($failureReport->getStatus()) {
-        ?>
+        <?php if ($allReportsFixed == []) { ?>
+            <td colspan='11' class="bg-light text-muted">There are no reports.</td>
+            <?php
+        } else {
+
+            foreach ($allReportsFixed as $index => $failureReport) :
+
+            ?>
                 <tr class="table-secondary">
+                    <td class="bg-dark text-white"><?php echo $index += ($currentPageFixed * 8) - 7; ?></td>
                     <td><?php echo $failureReport->getId(); ?></td>
                     <td><?php echo $failureReport->getUser()->getId(); ?></td>
                     <td><?php echo $failureReport->getUser()->getFirstName() . " " . $failureReport->getUser()->getLastName(); ?></td>
@@ -25,10 +32,10 @@
                     <td><?php echo $failureReport->getEquipement()->getName(); ?></td>
                     <td><?php echo $failureReport->getEquipement()->getModel(); ?></td>
                     <td><?php echo $failureReport->getEquipement()->getProcess(); ?></td>
-                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $failureReport->getId();?>">
+                    <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $failureReport->getId(); ?>">
                             Description
                         </button>
-                        <div class="modal fade" id="modal<?php echo $failureReport->getId();?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modal<?php echo $failureReport->getId(); ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -38,7 +45,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                    <p class="text-justify"><?php echo $failureReport->getDescription(); ?></p> 
+                                        <p class="text-justify"><?php echo $failureReport->getDescription(); ?></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -53,8 +60,53 @@
                 </tr>
         <?php
 
-            }
-        endforeach; ?>
+            endforeach;
+        } ?>
 
     </tbody>
 </table>
+
+
+<!--  PAGINATION -->
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <?php
+        if ($currentPageFixed && $currentPageFixed == 1) {
+        ?>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+        <?php
+        } else {
+        ?>
+            <li class="page-item">
+                <a class="page-link" href="home.php?type=technician&status=fixed&pageFixed=<?php echo $currentPageFixed - 1 ?>">Previous</a>
+            </li>
+        <?php
+        }
+        ?>
+
+        <?php
+        for ($i = 1; $i <= $numberOfPagesFixed; $i++) {
+        ?>
+            <li class="page-item <?php echo (isset($_GET['pageFixed']) && $_GET['pageFixed'] == $i) ?  'active' : ''; ?>"><a class="page-link" href="home.php?type=technician&status=fixed&pageFixed=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+        <?php
+        }
+        ?>
+        <?php
+        if ($currentPageFixed && ($currentPageFixed >= $numberOfPagesFixed)) {
+        ?>
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Next</a>
+            </li>
+        <?php
+        } else {
+        ?>
+            <li class="page-item">
+                <a class="page-link" href="home.php?type=technician&status=fixed&pageFixed=<?php echo $currentPageFixed + 1 ?>">Next</a>
+            </li>
+        <?php
+        }
+        ?>
+    </ul>
+</nav>
