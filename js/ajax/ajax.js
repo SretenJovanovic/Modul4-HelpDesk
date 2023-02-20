@@ -1,4 +1,3 @@
-
 // Request after submiting add user form
 $("#registerUserForm").submit(function (e) {
   e.preventDefault();
@@ -76,6 +75,30 @@ $("#editUserForm").submit(function (e) {
   request.done(function (response, textStatus, jqXHR) {
     if (response === "Success") {
       location.href = "home.php?msg=userUpdated";
+    } else {
+      console.log("Update failed." + response);
+    }
+  });
+  request.fail(function (jqXHR, textStatus, error) {
+    console.error("There was an error: " + textStatus, error);
+  });
+});
+
+// Request after submiting edit profile form
+$("#editProfileForm").submit(function (e) {
+  e.preventDefault();
+
+  const $form = $(this);
+  const serijalizacija = $form.serialize();
+  request = $.ajax({
+    url: "controller/users/editProfile.php",
+    type: "post",
+    data: serijalizacija,
+  });
+
+  request.done(function (response, textStatus, jqXHR) {
+    if (response === "Success") {
+      location.href = "includes/logout.inc.php";
     } else {
       console.log("Update failed." + response);
     }
@@ -302,7 +325,6 @@ $("#addReportForm").submit(function (e) {
     console.error("There was an error: " + textStatus, error);
   });
 });
-
 
 // Request after submiting change report status form
 $(".changeReportStatusForm").submit(function (e) {

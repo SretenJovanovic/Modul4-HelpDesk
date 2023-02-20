@@ -13,7 +13,7 @@
 
   <link rel="stylesheet" href="css/style.css">
 
-  <title>HelpDesk login</title>
+  <title>HelpDesk Login</title>
 </head>
 
 <body>

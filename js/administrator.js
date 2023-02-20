@@ -15,6 +15,7 @@ $(document).ready(function () {
     $("#userDashboard a").removeClass("active");
     $("#equipementDashboard a").removeClass("active");
 
+    // adding class MyActive to targeted link
     $(this).addClass("myActive");
 
     if ($(this).attr("class") == "nav-link myActive") {

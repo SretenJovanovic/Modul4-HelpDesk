@@ -16,10 +16,10 @@ if (!$allUsers) {
     $allUsers[] = "There is no users";
 }
 $allEquipement = EquipementCRUD::getAllEquipement($conn);
-if (!$allEquipement) {
-    $allEquipement[] = "There is no equipement";
-}
 
+if (!$allEquipement || $allEquipement === null) {
+    $allEquipement = ["There is no equipement"];
+}
 
 ?>
 <!DOCTYPE html>
@@ -47,6 +47,8 @@ if (!$allEquipement) {
 </head>
 
 <body class="bg-light">
+
+
     <!-- CONTAINER -->
     <div id="container">
         <?php

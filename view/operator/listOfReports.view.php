@@ -15,7 +15,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php if (!$allReports || $allReports == null || $allReports[0] == 'There are no reports') { ?>
+        <?php 
+        
+        if (!$allReports || $allReports == null || $allReports[0] == 'There are no reports') { ?>
             <tr class="table-secondary">
                 <td colspan="10">There are no reports in database.</td>
             </tr>
