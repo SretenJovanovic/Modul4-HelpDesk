@@ -6,20 +6,19 @@ require "model/equipement/equipement.crud.php";
 require "model/reports/failureReport.crud.php";
 require "model/db/singletonDB.php";
 require "model/reports/failureReport.pagination.php";
-
 session_start();
 
+$equipement = EquipementCRUD::getAllEquipement($conn)[0];
 
-$allUsers = UserCRUD::getAllUsers($conn);
-if (!$allUsers) {
-
-    $allUsers[] = "There is no users";
+if (!$equipement || $equipement == []) {
+    $allEquipement = [];
+} else {
+    $allEquipement = [];
+    foreach ($equipement as $eq) {
+        $allEquipement[] = new Equipement(...$eq);
+    }
 }
-$allEquipement = EquipementCRUD::getAllEquipement($conn);
 
-if (!$allEquipement || $allEquipement === null) {
-    $allEquipement = ["There is no equipement"];
-}
 
 ?>
 <!DOCTYPE html>

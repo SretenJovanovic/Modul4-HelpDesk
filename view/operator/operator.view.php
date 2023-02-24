@@ -45,16 +45,16 @@
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
                 <p class="bg-dark text-white p-5 m-3 mt-5">
-                Operater ima mogucnost prijave kvara masine odabirom masine iz padajuceg menija i opisivanjem samog kvara.
-                <br> Klikom na "Add report" prijava se salje i ispisuje se na tabu 'Failure list'. <br>
-                Kada Tehnicar resi kvar, ta prijava prelazi iz statusa "In progress" u status "Fixed" na tabu "Failure list".
+                    Operater ima mogucnost prijave kvara masine odabirom masine iz padajuceg menija i opisivanjem samog kvara.
+                    <br> Klikom na "Add report" prijava se salje i ispisuje se na tabu 'Failure list'. <br>
+                    Kada Tehnicar resi kvar, ta prijava prelazi iz statusa "In progress" u status "Fixed" na tabu "Failure list".
                 </p>
                 <p class="bg-dark text-white p-5 m-3 mt-5">
                     OPERATER
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">
-            <?php include_once('view/profile.view.php'); ?>
+                <?php include_once('view/profile.view.php'); ?>
             </div>
 
             <!-- RERORTS CONTENT TABS -->
@@ -64,10 +64,15 @@
             </div>
             <div class="tab-pane fade" id="addReport" role="tabpanel">
                 <h3>Add Report</h3>
-                <?php include_once('view/operator/failureReport.view.php'); ?>
+                <?php
+                include_once('view/operator/failureReport.view.php');
+                ?>
             </div>
 
         </div>
     </div>
 </main>
+
+
 <script src="js/operator.js"></script>
+<script src="js/ajax/searchReports.ajax.js"></script>

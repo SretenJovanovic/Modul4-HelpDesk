@@ -2,21 +2,44 @@
 include_once 'equipement.class.php';
 class EquipementCRUD
 {
+
+
     public static function getAllEquipement(mysqli $conn)
     {
-        $query = "SELECT * FROM equipement;";
-        $result = $conn->query($query);
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM equipement LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
         $arrayOfEquipement = [];
-        if ($result->num_rows === 0) {
-            return;
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no equipement in DB.';
         } else {
             while ($red = $result->fetch_assoc()) {
-                $arrayOfEquipement[] = new Equipement(...$red);
+                $arrayOfEquipement[] = $red;
             }
         }
-        return  $arrayOfEquipement;
-    }
+        // PAGINATION
+        $query = "SELECT * FROM equipement";
+        $result = mysqli_query($conn, $query);
 
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfEquipement, $totalPages, $msg];
+    }
 
     public static function getById($id, mysqli $conn)
     {

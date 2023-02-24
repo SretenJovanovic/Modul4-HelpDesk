@@ -1,117 +1,83 @@
 <?php
 
+include_once 'failureReport.class.php';
 class FailureReportCRUD
 {
     public static function getAllReports(mysqli $conn)
     {
-        if (!isset($_GET['page'])) {
-            $page = 1;
-        } else {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
             $page = $_GET['page'];
+        } else {
+            $page = 1;
         }
 
+        $start_from = ($page - 1) * $limit;
 
-        $results_per_page = 8;
-        $page_first_result = ($page - 1) * $results_per_page;
-
-        $query = "SELECT * FROM reports";
-        $result = mysqli_query($conn, $query);
-        $number_of_result = mysqli_num_rows($result);
-
-        $number_of_page = ceil($number_of_result / $results_per_page);
-
-
-
-        $query = "SELECT * FROM reports LIMIT " . $page_first_result . ',' . $results_per_page;
+        $query = "SELECT * FROM reports LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
-        if ($number_of_result === 0) {
-            return array('reports' => $arrayOfReports = [], 'numOfPages' => $number_of_page, 'page' => $page);
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
         } else {
             while ($red = $result->fetch_assoc()) {
                 $arrayOfReports[] = $red;
             }
         }
+        // PAGINATION
+        $query = "SELECT * FROM reports";
+        $result = mysqli_query($conn, $query);
 
+        $totalRows = $result->num_rows;
 
-        if ($page > $number_of_page) {
-            header("Location:home.php?type=operator&page=1");
-        }
-        return  array('reports' => $arrayOfReports, 'numOfPages' => $number_of_page, 'page' => $page);
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
     }
 
-    public static function getAllReportsFixed(mysqli $conn)
+    public static function getAllReportsProgressFixed($status, mysqli $conn)
     {
-        if (!isset($_GET['pageFixed']) || $_GET['pageFixed'] == 0) {
-            $page = 1;
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
         } else {
-            $page = $_GET['pageFixed'];
+            $page = 1;
         }
 
-        $results_per_page = 8;
-        $page_first_result = ($page - 1) * $results_per_page;
+        $start_from = ($page - 1) * $limit;
 
-        $query = "SELECT * FROM reports WHERE status='fixed';";
-        $result = mysqli_query($conn, $query);
-        $number_of_result = mysqli_num_rows($result);
-
-        $number_of_page_fixed = ceil($number_of_result / $results_per_page);
-
-
-
-        $query = "SELECT * FROM reports WHERE status='fixed' LIMIT " . $page_first_result . ',' . $results_per_page;
+        $query = "SELECT * FROM reports WHERE status='$status' LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
+        $number_of_result = $result->num_rows;
 
-
-        if ($number_of_result === 0) {
-            return array('reportsFixed' => $arrayOfReportsFixed = [], 'numOfPagesFixed' => $number_of_page_fixed, 'page' => $page);
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
         } else {
             while ($red = $result->fetch_assoc()) {
-                $arrayOfReportsFixed[] = $red;
+                $arrayOfReports[] = $red;
             }
         }
-        if ($page > $number_of_page_fixed) {
-            header("Location:home.php?type=technician&status=fixed&pageProgress=1");
-        }
-        return  array('reportsFixed' => $arrayOfReportsFixed, 'numOfPagesFixed' => $number_of_page_fixed, 'page' => $page);
-    }
-
-    public static function getAllReportsProgress(mysqli $conn)
-    {
-
-        if (!isset($_GET['pageProgress']) || $_GET['pageProgress'] == 0) {
-            $page = 1;
-        } else {
-            $page = $_GET['pageProgress'];
-        }
-
-
-        $results_per_page = 8;
-        $page_first_result = ($page - 1) * $results_per_page;
-
-        $query = "SELECT * FROM reports WHERE status='in progress';";
-        $result = mysqli_query($conn, $query);
-        $number_of_result = mysqli_num_rows($result);
-
-        $number_of_page_progress = ceil($number_of_result / $results_per_page);
-
-
-        $query = "SELECT * FROM reports WHERE status='in progress' LIMIT " . $page_first_result . ',' . $results_per_page;
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status='$status'";
         $result = mysqli_query($conn, $query);
 
-        if ($number_of_result === 0) {
-            return array('reportsProgress' => $arrayOfReportsProgress = [], 'numOfPagesProgress' => $number_of_page_progress, 'page' => $page);
-        } else {
-            while ($red = $result->fetch_assoc()) {
-                $arrayOfReportsProgress[] = $red;
-            }
-        }
-        if ($page > $number_of_page_progress) {
-            header("Location:home.php?type=technician&status=reported&pageProgress=1");
-        }
-        return  array('reportsProgress' => $arrayOfReportsProgress, 'numOfPagesProgress' => $number_of_page_progress, 'page' => $page);
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
     }
+
+
     public static function getById($id, mysqli $conn)
     {
 

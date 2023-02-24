@@ -6,7 +6,7 @@
             <a href="#" class="nav-link myActive"><i class="bi bi-person-fill"></i>Profile</a>
         </li>
         <li class="nav-item">
-            <a href="#users" class="nav-link"><i class="bi bi-people-fill"></i>Users</a>
+            <a href="#" id="link-users" class="nav-link"><i class="bi bi-people-fill"></i>Users</a>
         </li>
         <li class="nav-item">
             <a href="#" class="nav-link"><i class="bi bi-wrench-adjustable-circle-fill"></i>Equipement</a>
@@ -69,7 +69,7 @@
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">
-            <?php include_once('view/profile.view.php'); ?>
+                <?php include_once('view/profile.view.php'); ?>
             </div>
 
             <!-- USERS CONTENT TABS -->
@@ -82,9 +82,11 @@
             <!-- EQUIPEMENT CONTENT TABS -->
             <div class="tab-pane fade show" id="listOfEquipement" role="tabpanel">
                 <?php include_once('view/administrator/equipement.read.php'); ?>
+
             </div>
             <div class="tab-pane fade" id="addEquipement" role="tabpanel">
                 <?php include_once('view/administrator/equipement.add.php'); ?>
+
             </div>
         </div>
     </div>
@@ -92,3 +94,4 @@
 
 
 <script src="js/administrator.js"></script>
+<script src="js/ajax/searchUserEquipement.ajax.js"></script>

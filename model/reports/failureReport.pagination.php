@@ -1,6 +1,5 @@
 <?php
-
-
+/*
 // All reports
 $reports = FailureReportCRUD::getAllReports($conn)['reports'];
 $number_of_pages = FailureReportCRUD::getAllReports($conn)['numOfPages'];
@@ -123,3 +122,4 @@ if (!$reportsFixed || $reportsFixed == []) {
         $allReportsFixed[] = new FailureReport($report['ID'], $user, $equipement, $report['description'], $report['report_date'], $report['fixed_date'], $status);
     }
 }
+*/

@@ -2,19 +2,82 @@
 include_once 'user.class.php';
 class UserCRUD
 {
+
     public static function getAllUsers(mysqli $conn)
     {
-        $query = "SELECT * FROM users;";
-        $result = $conn->query($query);
-        $arrayOfUsers=[];
-        if ($result->num_rows === 0) {
-            
-            return;
-        }else 
-        while ($red = $result->fetch_assoc()) {
-            $arrayOfUsers[] = new User(...$red);
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
         }
-        return  $arrayOfUsers;
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM users LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfUsers = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no users in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfUsers[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM users";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfUsers, $totalPages, $msg];
+    }
+
+    // TODO SEARCH INPUT
+    public static function searchByFirstOrLastName($search, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM users 
+        WHERE firstName LIKE '%$search%' OR lastName LIKE '%$search%' OR username LIKE '%$search%'
+        LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfUsers = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg =  'There is no users in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfUsers[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM users WHERE username LIKE '%$search%'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfUsers, $totalPages, $msg];
     }
 
 

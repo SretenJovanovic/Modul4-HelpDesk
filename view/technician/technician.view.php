@@ -29,10 +29,8 @@
     <div class="row" id="reportDashboard">
         <div class="col">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link" data-toggle="pill" href="#listOfReported" role="tab">List of Reported Defects</a>
-                <a class="nav-link" data-toggle="pill" href="#listOfFixed">List of Fixed Defects</a>
-                <a class="nav-link" data-toggle="pill" href="#user1">Something</a>
-                <a class="nav-link" data-toggle="pill" href="#user2">Something else</a>
+                <a class="nav-link getReports" id="listOfReportedLink" data-toggle="pill" href="#listOfReported" role="tab">List of Reported Defects</a>
+                <a class="nav-link getReports" id="listOfFixedLink" data-toggle="pill" href="#listOfFixed">List of Fixed Defects</a>
             </div>
         </div>
     </div>
@@ -45,16 +43,16 @@
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
                 <p class="bg-dark text-white p-5 m-3 mt-5">
-                Tehnicar ima mogucnost pregleda trenutno prijavjenih kvarova.<br>
-        Klikom na dugme "Fix", prijava se prebacuje u status "Fixed" i prosledjuje u listu "List of Repaired Equipement".
+                    Tehnicar ima mogucnost pregleda trenutno prijavjenih kvarova.<br>
+                    Klikom na dugme "Fix", prijava se prebacuje u status "Fixed" i prosledjuje u listu "List of Repaired Equipement".
                 </p>
                 <p class="bg-dark text-white p-5 m-3 mt-5">
                     TEHNICAR
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">
-            <?php include_once('view/profile.view.php'); ?>
-        </div>
+                <?php include_once('view/profile.view.php'); ?>
+            </div>
 
             <!-- USERS CONTENT TABS -->
             <div class="tab-pane fade show" id="listOfReported" role="tabpanel">
@@ -69,3 +67,4 @@
     </div>
 </main>
 <script src="js/technician.js"></script>
+<script src="js/ajax/getReports.ajax.js"></script>

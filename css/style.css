@@ -147,6 +147,20 @@
   box-shadow: none;
 }
 
+.tab-pane{
+  margin-top: 20px;
+}
+
+#one {
+  animation: scale 1s ease-in-out infinite alternate;
+}
+#two {
+  animation: scale 2s ease-in-out infinite alternate;
+}
+#three {
+  animation: scale 4s ease-in-out infinite alternate;
+}
+
 @keyframes shake {
   25% {
     translate: 6px 0;
@@ -158,3 +172,15 @@
     translate: 6px 0;
   }
 }
+
+@keyframes scale {
+  0% {
+    transform: scale(1);
+  }
+  500% {
+    transform: scale(1.2);
+  }100% {
+    transform: scale(1.3);
+  }
+}
+

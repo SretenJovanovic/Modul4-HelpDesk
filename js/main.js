@@ -1,17 +1,16 @@
 $(document).ready(function () {
-
   //Dodavanje vrednosti u edit user modal
   var url_string = window.location.href; // www.test.com?filename=test
   var url = new URL(url_string);
-
-    
   // fetching get values from url
 
   var paramValueMsg = url.searchParams.get("msg");
   var paramValuePage = url.searchParams.get("page");
+  var paramValuePageEq = url.searchParams.get("pageEq");
+  var paramValuePageUsers = url.searchParams.get("pageUsers");
   var paramValueType = url.searchParams.get("type");
   var paramValueStatus = url.searchParams.get("status");
-  
+
   const regEx = /^\d*(\.\d+)?$/;
   // const regExFixed= /[a-z]*[1-9]/g;
   if (paramValuePage == null) {
@@ -23,13 +22,26 @@ $(document).ready(function () {
   if (paramValueType == null) {
     paramValueType = "";
   }
+  if (paramValuePageEq == null) {
+    paramValuePageEq = "";
+  }
+  if (paramValuePageUsers == null) {
+    paramValuePageUsers = "";
+  }
+
   var tabs = $("#sidebar ul li a");
 
+  
   if (
     paramValueMsg == "userUpdated" ||
     paramValueMsg == "userDeleted" ||
-    paramValueMsg == "userInserted"
+    paramValueMsg == "userInserted" ||
+    (paramValuePageUsers.match(regEx) &&
+      paramValueType == "administrator" &&
+      paramValuePageUsers !== ''
+      )
   ) {
+    
     tabs.removeClass("myActive");
     tabs[1].classList.add("myActive");
 
@@ -45,7 +57,10 @@ $(document).ready(function () {
   if (
     paramValueMsg == "equipementUpdated" ||
     paramValueMsg == "equipementDeleted" ||
-    paramValueMsg == "equipementInserted"
+    paramValueMsg == "equipementInserted" ||
+    (paramValuePageEq.match(regEx) &&
+      paramValueType == "administrator" &&
+      paramValuePageEq !== '')
   ) {
     tabs.removeClass("myActive");
     tabs[2].classList.add("myActive");
