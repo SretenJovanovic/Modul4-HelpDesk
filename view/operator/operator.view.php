@@ -44,13 +44,13 @@
         <div class="tab-content" id="v-pills-tabContent">
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
+                <h3 class=" text-center bg-dark text-white p-5 m-3 mt-5">
+                    OPERATER
+                </h3>
                 <p class="bg-dark text-white p-5 m-3 mt-5">
                     Operater ima mogucnost prijave kvara masine odabirom masine iz padajuceg menija i opisivanjem samog kvara.
-                    <br> Klikom na "Add report" prijava se salje i ispisuje se na tabu 'Failure list'. <br>
-                    Kada Tehnicar resi kvar, ta prijava prelazi iz statusa "In progress" u status "Fixed" na tabu "Failure list".
-                </p>
-                <p class="bg-dark text-white p-5 m-3 mt-5">
-                    OPERATER
+                    <br> Klikom na "Add report" prijava se salje i ispisuje se na tabu 'List of Reports'. <br>
+                    Kada Tehnicar resi kvar, ta prijava prelazi iz statusa "In progress" u status "Fixed" na tabu "List of Reports".
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">

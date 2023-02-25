@@ -15,9 +15,10 @@
             <label for="equipement">Equipement</label>
 
             <?php
-            if ($allEquipement == ["There is no equipement"]) {
+            if ($allEquipement == "There is no equipement") {
             ?>
                 <select class="form-control" name="equipementID" id="equipementID" disabled>
+                    <option value="">There is no equipement</option>
                 <?php
             } else {
                 ?>

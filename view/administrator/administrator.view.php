@@ -55,11 +55,14 @@
         <div class="tab-content" id="v-pills-tabContent">
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
+            <h3 class=" text-center bg-dark text-white p-5 m-3 mt-5">
+                    ADMINISTRATOR
+                </h3>
                 <p class="bg-dark text-white p-5 m-3 mt-5">
-                    Dodati 2 korisnika klikom na "Add user",popuniti formu i postaviti za jednog korisnika tip "Operater",
+                    Dodati 2 korisnika klikom na "Users->Add user",popuniti formu i postaviti za jednog korisnika tip "Operater",
                     a za drugog tip "Tehnicar".
                     <br>
-                    Proizvoljno dodati opremu klikom na "Add equipement". <br>
+                    Dodati opremu klikom na "Equipement->Add equipement". <br>
                     Nakon toga preko naloga "Operater" bice moguce otvaranje prijave, i resavanje iste preko naloga "Tehnicar".
                 </p>
                 <p class="bg-dark text-white p-5 m-3 mt-5">

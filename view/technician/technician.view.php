@@ -42,12 +42,13 @@
         <div class="tab-content" id="v-pills-tabContent">
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
-                <p class="bg-dark text-white p-5 m-3 mt-5">
-                    Tehnicar ima mogucnost pregleda trenutno prijavjenih kvarova.<br>
-                    Klikom na dugme "Fix", prijava se prebacuje u status "Fixed" i prosledjuje u listu "List of Repaired Equipement".
-                </p>
-                <p class="bg-dark text-white p-5 m-3 mt-5">
+
+                <h3 class="bg-dark text-center text-white p-5 m-3 mt-5">
                     TEHNICAR
+                </h3>
+                <p class="display-5 bg-dark text-white p-5 m-3 mt-5">
+                    Tehnicar ima mogucnost pregleda trenutno prijavjenih kvarova.<br>
+                    Klikom na dugme "Fix", prijava se prebacuje u status "Fixed" i prosledjuje u listu "List of Fixed Defects".
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">

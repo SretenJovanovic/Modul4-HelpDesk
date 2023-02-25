@@ -11,7 +11,7 @@ session_start();
 $equipement = EquipementCRUD::getEquipement($conn)[0];
 
 if (!$equipement || $equipement == []) {
-    $allEquipement = [];
+    $allEquipement = 'There is no equipement';
 } else {
     $allEquipement = [];
     foreach ($equipement as $eq) {
