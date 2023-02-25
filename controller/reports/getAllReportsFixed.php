@@ -6,17 +6,9 @@ require "../../model/users/user.crud.php";
 require "../../model/equipement/equipement.crud.php";
 
 
-
-$result = FailureReportCRUD::getAllReports($conn);
 if (isset($_GET['status']) && !empty($_GET['status'])) {
     $statusGet = $_GET['status'];
     $result = FailureReportCRUD::getAllReportsProgressFixed($statusGet, $conn);
-}
-if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'operator') {
-    $type = $_GET['type'];
-    $result = FailureReportCRUD::getAllReports($conn);
-} else {
-    $type = $_GET['type'];
 }
 $status = $result[0];
 $totalPages = $result[1];
@@ -153,20 +145,7 @@ $output2 = '';
 
 $output2 .= '<nav aria-label="Page navigation example" id="hia">';
 $output2 .= '<ul class="pagination paginationReport justify-content-center">';
-if ($type == 'operator') {
-    $output2 .= '<li class="page-item">
-    <a class="page-link pageNumsReport prevBtnReport" id="prevBtnReport" href="?page=' . $page . '">Previous</a>
-</li>';
-
-    for ($i = 1; $i <= $totalPages; $i++) {
-
-        $output2 .= '<li class="page-item"><a class="page-link pageNumsReport" href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    $output2 .= '<li class="page-item">
-<a class="page-link pageNumsReport nextBtnReport" id="nextBtnReport" href="?page=' . $page + 1 . '">Next</a>
-</li>';
-} else if ($statusGet == 'fixed') {
+if ($status == 'fixed') {
     $output2 .= '<li class="page-item">
     <a class="page-link pageNumsReportFixed prevBtnReportFixed" id="prevBtnReportFixed" href="?page=' . $page . '">Previous</a>
 </li>';

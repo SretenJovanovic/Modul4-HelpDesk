@@ -1,5 +1,4 @@
 <?php
-
 include_once 'failureReport.class.php';
 class FailureReportCRUD
 {

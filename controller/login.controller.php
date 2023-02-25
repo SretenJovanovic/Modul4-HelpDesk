@@ -13,6 +13,6 @@ if (isset($_POST['email_username']) && isset($_POST['password']) && !empty($_POS
         $type = $status->getType();
         echo $type;
     } else {
-        echo "Failed!";
+        echo "Failed";
     }
 }

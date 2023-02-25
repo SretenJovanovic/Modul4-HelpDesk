@@ -1,18 +1,19 @@
 // GET ALL USERS WHEN DOCUMENT IS FINISHED LOADING
-$(document).ready(function () {
   // Setting initial page number to 1
-  console.log('hi');
+  
+  
   page = 1;
   request = $.ajax({
     url: "controller/reports/getAllReports.php",
     type: "get",
-    data: { page: page },
+    data: { page: page,
+    type:'operator' },
   });
 
   request.done(function (response, textStatus, jqXHR) {
-    
     if (response) {
       var result = jQuery.parseJSON(response);
+      
       // Inserting data to usersTableDiv
       getReportsTbody = document.getElementById("reportsTableDiv");
       getReportsTbody.innerHTML = result["output"];
@@ -22,10 +23,10 @@ $(document).ready(function () {
 
       // Adding ACTIVE class to link
       addActiveClass(page, "pageNumsReport");
-
       // Set prevBtn to page+1 number
       setPrevPage(page, "prevBtnReport");
-
+      
+      setNextPage(page, result["totalPages"], "nextBtnReport");
       pagination();
     } else {
       console.log("Nema podataka" + response);
@@ -34,7 +35,7 @@ $(document).ready(function () {
   request.fail(function (jqXHR, textStatus, error) {
     console.error("Desila se greska: " + textStatus, error);
   });
-});
+  
 
 function addActiveClass(page, linkClass) {
   // Adding ACTIVE class to link
@@ -79,7 +80,7 @@ function setPrevPage(page, prevId) {
 function pagination() {
   $("a.pageNumsReport").on("click", function (e) {
     e.preventDefault();
-    console.log("LINK JE KLIKNUT");
+    
 
     var links = document.querySelectorAll(".paginationReport li");
 
@@ -96,18 +97,18 @@ function pagination() {
     request = $.ajax({
       url: "controller/reports/getAllReports.php",
       type: "get",
-      data: { page: page },
+      data: { page: page,type:'operator'},
     });
 
     request.done(function (response, textStatus, jqXHR) {
       if (response) {
+        
         try {
           var result = jQuery.parseJSON(response);
           // Table with trow of all users
           let reportsTable = result["output"];
           // Total pages of users in DB and number of links
           const totalPages = result["totalPages"];
-
           // Adding ACTIVE class to link
           addActiveClass(page, "pageNumsReport");
           // Set next and prev page href and class

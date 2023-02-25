@@ -5,10 +5,10 @@ require "model/users/user.crud.php";
 require "model/equipement/equipement.crud.php";
 require "model/reports/failureReport.crud.php";
 require "model/db/singletonDB.php";
-require "model/reports/failureReport.pagination.php";
 session_start();
 
-$equipement = EquipementCRUD::getAllEquipement($conn)[0];
+
+$equipement = EquipementCRUD::getEquipement($conn)[0];
 
 if (!$equipement || $equipement == []) {
     $allEquipement = [];
@@ -18,7 +18,6 @@ if (!$equipement || $equipement == []) {
         $allEquipement[] = new Equipement(...$eq);
     }
 }
-
 
 ?>
 <!DOCTYPE html>
@@ -50,6 +49,7 @@ if (!$equipement || $equipement == []) {
 
     <!-- CONTAINER -->
     <div id="container">
+<div id="alertMessage"></div>
         <?php
 
         if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
@@ -78,6 +78,7 @@ if (!$equipement || $equipement == []) {
 
     <!-- My JS -->
     <script src="js/main.js"></script>
+    <script src="js/alert.js"></script>
     <script src="js/ajax/ajax.js"></script>
 </body>
 

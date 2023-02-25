@@ -84,7 +84,7 @@ class UserCRUD
     public static function getById($id, mysqli $conn)
     {
 
-        $query = "SELECT * FROM users WHERE id = $id;";
+        $query = "SELECT * FROM users WHERE ID = $id;";
         $result = $conn->query($query);
 
         $row = $result->fetch_assoc();

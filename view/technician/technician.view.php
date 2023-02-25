@@ -67,4 +67,4 @@
     </div>
 </main>
 <script src="js/technician.js"></script>
-<script src="js/ajax/getReports.ajax.js"></script>
+<script src="js/ajax/reportsTechnician.ajax.js"></script>

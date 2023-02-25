@@ -71,4 +71,27 @@ class EquipementCRUD
         $query = "DELETE FROM equipement WHERE id = $id;";
         return $conn->query($query);
     }
+
+    public static function getEquipement(mysqli $conn)
+    {
+      
+        $query = "SELECT * FROM equipement";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfEquipement = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no equipement in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfEquipement[] = $red;
+            }
+        }
+        $totalRows = $result->num_rows;
+
+
+        return [$arrayOfEquipement];
+    }
 }

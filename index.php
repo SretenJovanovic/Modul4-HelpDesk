@@ -11,6 +11,9 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
   <link rel="stylesheet" href="css/style.css">
 
   <title>HelpDesk Login</title>
@@ -18,32 +21,6 @@
 
 <body class="bg-dark">
 
-  <div class="text-center mt-5">
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
-      Kredencijali za logovanje
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Administrator</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>Email : admin@test</p><br>
-            <p>Password : admin123 </p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <svg id="wave" style="position:absolute;bottom:0;z-index:-1;transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -66,16 +43,19 @@
         <stop stop-color="rgba(182.513, 180.122, 174.835, 1)" offset="100%"></stop>
       </linearGradient>
     </defs>
-    <path id='three'style="transform:translate(0, 100px); opacity:0.8" fill="url(#sw-gradient-2)" d="M0,196L60,179.7C120,163,240,131,360,130.7C480,131,600,163,720,147C840,131,960,65,1080,32.7C1200,0,1320,0,1440,16.3C1560,33,1680,65,1800,89.8C1920,114,2040,131,2160,179.7C2280,229,2400,310,2520,343C2640,376,2760,359,2880,326.7C3000,294,3120,245,3240,253.2C3360,261,3480,327,3600,326.7C3720,327,3840,261,3960,269.5C4080,278,4200,359,4320,359.3C4440,359,4560,278,4680,204.2C4800,131,4920,65,5040,65.3C5160,65,5280,131,5400,179.7C5520,229,5640,261,5760,261.3C5880,261,6000,229,6120,236.8C6240,245,6360,294,6480,294C6600,294,6720,245,6840,187.8C6960,131,7080,65,7200,106.2C7320,147,7440,294,7560,318.5C7680,343,7800,245,7920,196C8040,147,8160,147,8280,171.5C8400,196,8520,245,8580,269.5L8640,294L8640,490L8580,490C8520,490,8400,490,8280,490C8160,490,8040,490,7920,490C7800,490,7680,490,7560,490C7440,490,7320,490,7200,490C7080,490,6960,490,6840,490C6720,490,6600,490,6480,490C6360,490,6240,490,6120,490C6000,490,5880,490,5760,490C5640,490,5520,490,5400,490C5280,490,5160,490,5040,490C4920,490,4800,490,4680,490C4560,490,4440,490,4320,490C4200,490,4080,490,3960,490C3840,490,3720,490,3600,490C3480,490,3360,490,3240,490C3120,490,3000,490,2880,490C2760,490,2640,490,2520,490C2400,490,2280,490,2160,490C2040,490,1920,490,1800,490C1680,490,1560,490,1440,490C1320,490,1200,490,1080,490C960,490,840,490,720,490C600,490,480,490,360,490C240,490,120,490,60,490L0,490Z"></path>
+    <path id='three' style="transform:translate(0, 100px); opacity:0.8" fill="url(#sw-gradient-2)" d="M0,196L60,179.7C120,163,240,131,360,130.7C480,131,600,163,720,147C840,131,960,65,1080,32.7C1200,0,1320,0,1440,16.3C1560,33,1680,65,1800,89.8C1920,114,2040,131,2160,179.7C2280,229,2400,310,2520,343C2640,376,2760,359,2880,326.7C3000,294,3120,245,3240,253.2C3360,261,3480,327,3600,326.7C3720,327,3840,261,3960,269.5C4080,278,4200,359,4320,359.3C4440,359,4560,278,4680,204.2C4800,131,4920,65,5040,65.3C5160,65,5280,131,5400,179.7C5520,229,5640,261,5760,261.3C5880,261,6000,229,6120,236.8C6240,245,6360,294,6480,294C6600,294,6720,245,6840,187.8C6960,131,7080,65,7200,106.2C7320,147,7440,294,7560,318.5C7680,343,7800,245,7920,196C8040,147,8160,147,8280,171.5C8400,196,8520,245,8580,269.5L8640,294L8640,490L8580,490C8520,490,8400,490,8280,490C8160,490,8040,490,7920,490C7800,490,7680,490,7560,490C7440,490,7320,490,7200,490C7080,490,6960,490,6840,490C6720,490,6600,490,6480,490C6360,490,6240,490,6120,490C6000,490,5880,490,5760,490C5640,490,5520,490,5400,490C5280,490,5160,490,5040,490C4920,490,4800,490,4680,490C4560,490,4440,490,4320,490C4200,490,4080,490,3960,490C3840,490,3720,490,3600,490C3480,490,3360,490,3240,490C3120,490,3000,490,2880,490C2760,490,2640,490,2520,490C2400,490,2280,490,2160,490C2040,490,1920,490,1800,490C1680,490,1560,490,1440,490C1320,490,1200,490,1080,490C960,490,840,490,720,490C600,490,480,490,360,490C240,490,120,490,60,490L0,490Z"></path>
   </svg>
   <?php
   include('view/login.view.php');
   ?>
 
 
-  <script src="js/main.js"></script>
-  <script src="js/login.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/alert.js"></script>
+  <script src="js/login.js"></script>
+  
 </body>
 
 </html>

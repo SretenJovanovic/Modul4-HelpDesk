@@ -94,4 +94,4 @@
 
 
 <script src="js/administrator.js"></script>
-<script src="js/ajax/getAllUsersEq.ajax.js"></script>
+<script src="js/ajax/getAllUsersEquipement.ajax.js"></script>

@@ -75,4 +75,4 @@
 
 
 <script src="js/operator.js"></script>
-<script src="js/ajax/searchReports.ajax.js"></script>
+<script src="js/ajax/reportsOperator.ajax.js"></script>
