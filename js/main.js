@@ -128,4 +128,5 @@ $(document).ready(function () {
     $("#reportDashboard").show();
     $('#v-pills-tab a[href="#listOfReported"]').tab("show");
   }
+  
 });

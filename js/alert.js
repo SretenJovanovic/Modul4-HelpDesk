@@ -4,6 +4,12 @@ var url = new URL(url_string);
 
 var paramValueMsg = url.searchParams.get("msg");
 
+if (paramValueMsg == "userNotLogged") {
+  const alertLogin = document.getElementById("msg");
+  message = "You need to login first.";
+  alertLogin.innerHTML = alertDangerMsg(message);
+  hideAlert();
+}
 if (paramValueMsg == "loggedOut") {
   const alertLogin = document.getElementById("msg");
   message = "You have been logged out.";
