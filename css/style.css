@@ -140,6 +140,18 @@
 #email_username:invalid {
   border: 2px solid rgb(250, 2, 2);
   animation: shake 0.2s 2;
+  box-shadow: 0 0 10px #719ece !important;
+}
+#password:not(:placeholder-shown):valid,
+#email_username:not(:placeholder-shown):valid
+ {
+  border: 2px solid rgb(2, 255, 2);
+  box-shadow: 0 0 10px #719ece !important;
+}
+
+#login:invalid button {
+  opacity: 0.3;
+  pointer-events: none;
 }
 #password:focus,
 #email_username:focus {
@@ -223,7 +235,6 @@
 }
 .input-box input:focus {
   outline: none !important;
-  border: 1px solid green !important;
   background: transparent !important;
   padding: 3px;
   box-shadow: 0 0 10px #719ece !important;
@@ -272,8 +283,8 @@
 
 #alertMessage {
   position: absolute;
-  top:50%;
-  width:15%;
-  left:15%;
+  top: 50%;
+  width: 15%;
+  left: 15%;
   z-index: 4;
 }

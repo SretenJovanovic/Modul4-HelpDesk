@@ -12,7 +12,7 @@
             <i id="showPassword" class="bi bi-eye-fill"></i>
         </span>
     </div>
-    <button class="login-btn" type="submit" name="loginSubmit">Login</button>
+    <button id="loginButton" class="login-btn" type="submit" name="loginSubmit">Login</button>
     <div id="msg"></div>
 </form>
 
