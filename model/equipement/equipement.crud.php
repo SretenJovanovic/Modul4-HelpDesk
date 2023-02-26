@@ -41,6 +41,84 @@ class EquipementCRUD
         return [$arrayOfEquipement, $totalPages, $msg];
     }
 
+    public static function sortByName($sort, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM equipement ORDER BY name $sort LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfUsers = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no equipement in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfUsers[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM equipement";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfUsers, $totalPages, $msg];
+    }
+
+
+    //SEARCH INPUT
+    public static function searchByIdNameModel($search, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM equipement 
+        WHERE ID LIKE '%$search%' OR name LIKE '%$search%' OR model LIKE '%$search%'
+        LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfUsers = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no equipement in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfUsers[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM equipement WHERE ID LIKE '%$search%' OR name LIKE '%$search%' OR model LIKE '%$search%'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfUsers, $totalPages, $msg];
+    }
+
     public static function getById($id, mysqli $conn)
     {
 
@@ -74,7 +152,7 @@ class EquipementCRUD
 
     public static function getEquipement(mysqli $conn)
     {
-      
+
         $query = "SELECT * FROM equipement";
         $result = mysqli_query($conn, $query);
 

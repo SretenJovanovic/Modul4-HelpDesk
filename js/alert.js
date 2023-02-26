@@ -36,7 +36,7 @@ if (paramValueMsg == "equipementInserted") {
 }
 if (paramValueMsg == "userInserted") {
   const alertLogin = document.getElementById("alertMessage");
-  message = "Succesfully inserted user.";
+  message = "User created successfully.";
   alertLogin.innerHTML = alertSuccessMsg(message);
   hideAlert2();
 }
@@ -50,6 +50,18 @@ if (paramValueMsg == "equipementDeleted") {
   const alertLogin = document.getElementById("alertMessage");
   message = "Equipement deleted.";
   alertLogin.innerHTML = alertDangerMsg(message);
+  hideAlert2();
+}
+if (paramValueMsg == "equipementUpdated") {
+  const alertLogin = document.getElementById("alertMessage");
+  message = "Equipement updated.";
+  alertLogin.innerHTML = alertSuccessMsg(message);
+  hideAlert2();
+}
+if (paramValueMsg == "userUpdated") {
+  const alertLogin = document.getElementById("alertMessage");
+  message = "User updated.";
+  alertLogin.innerHTML = alertSuccessMsg(message);
   hideAlert2();
 }
 

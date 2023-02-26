@@ -6,16 +6,38 @@ require "../../model/users/user.crud.php";
 require "../../model/equipement/equipement.crud.php";
 
 
+$page = $_GET['page'];
+
 if (isset($_GET['status']) && !empty($_GET['status'])) {
-    $statusGet = $_GET['status'];
-    $result = FailureReportCRUD::getAllReportsProgressFixed($statusGet, $conn);
+    if ($_GET['status'] == 'in progress') {
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $_GET['search'];
+            $result = FailureReportCRUD::searchProgressByOperatorIdDate($search, $conn);
+        } else if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+            $sort = $_GET['sort'];
+            $result = FailureReportCRUD::sortByOperatorId($sort, $conn);
+        } else {
+            $result = FailureReportCRUD::getAllReportsProgress($conn);
+        }
+        $fixed = false;
+    } else if ($_GET['status'] == 'fixed') {
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $_GET['search'];
+            $result = FailureReportCRUD::searchFixedByOperatorIdDate($search, $conn);
+        } else if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+            $sort = $_GET['sort'];
+            $result = FailureReportCRUD::sortFixedByOperatorId($sort, $conn);
+        } else {
+            $result = FailureReportCRUD::getAllReportsFixed($conn);
+        }
+        $fixed = true;
+    }
 }
 $status = $result[0];
 $totalPages = $result[1];
 $msg = $result[2];
 
 
-$page = $_GET['page'];
 
 if (!$status || $status == []) {
     $allReports = [];
@@ -64,8 +86,13 @@ $output = '<table class="table table-sm">
         <th>Equipement Name</th>
         <th>Process</th>
         <th>Failure Description</th>
-        <th>Report Date</th>
-        <th>Status</th>
+        <th>Report Date</th>';
+if (!$fixed) {
+    $output .= '<th>Status</th>';
+} else {
+    $output .= '<th>Fixed Date</th>';
+}
+$output .= '
     </tr>
 </thead>
 <tbody>';
@@ -83,6 +110,7 @@ if ($allReports == []) {
         $eqProcess = $failureReport->getEquipement()->getProcess();
         $description = $failureReport->getDescription();
         $reportDate = $failureReport->getReportDate();
+        $fixedDate = $failureReport->getFixedDate();
         $status = $failureReport->getStatus();
 
         $output .= '
@@ -118,51 +146,31 @@ if ($allReports == []) {
                         </div>
                     </td>
                     <td>' . $reportDate . '</td>';
-        if ($status) {
-            $output .= '<td><span class="text-success">Fixed</span></td></tr>';
-        } else if (!$status && $type == 'operator') {
-            $output .= '<td><span class="text-danger">In progress</span></td></tr>';
-        } else {
+        if (!$fixed) {
             $output .= '<td>
-            <form method="POST" class="changeReportStatusForm">
-                <div class="form-check">
-                    <input type="hidden" name="failureId" value="' . $id . '">
-                    <button type="submit" class="btn btn-success pl-5 pr-5" name="submitFix">Fix</button>
-                </div>
-            </form>
-        </td>';
+                        <form method="POST" class="changeReportStatusForm">
+                            <div class="form-check">
+                                <input type="hidden" name="failureId" value="' . $id . '">
+                                <button type="submit" class="btn btn-success pl-5 pr-5" name="submitFix">Fix</button>
+                            </div>
+                        </form>
+                        </td>
+            </tr>';
+        } else {
+            $output .= '<td>' . $fixedDate . '</td></tr>';
         }
+
     endforeach;
 }
 
 $output .= '
 </tbody>
 </table>';
-
-
-
 $output2 = '';
-
-$output2 .= '<nav aria-label="Page navigation example" id="hia">';
-$output2 .= '<ul class="pagination paginationReport justify-content-center">';
-if ($status == 'fixed') {
-    $output2 .= '<li class="page-item">
-    <a class="page-link pageNumsReportFixed prevBtnReportFixed" id="prevBtnReportFixed" href="?page=' . $page . '">Previous</a>
+if (!$fixed) {
+    $output2 .= '<nav aria-label="Page navigation example" id="hia"><ul class="pagination paginationReport justify-content-center"><li class="page-item">
+    <a class="page-link pageNumsReport prevBtnReport" id="prevBtnReport" href="?page=' . $page . '">Previous</a>
 </li>';
-
-    for ($i = 1; $i <= $totalPages; $i++) {
-
-        $output2 .= '<li class="page-item"><a class="page-link pageNumsReportFixed" href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    $output2 .= '<li class="page-item">
-<a class="page-link pageNumsReportFixed nextBtnReportFixed" id="nextBtnReportFixed" href="?page=' . $page + 1 . '">Next</a>
-</li>';
-} else {
-
-    $output2 .= '<li class="page-item">
-                <a class="page-link pageNumsReport prevBtnReport" id="prevBtnReport" href="?page=' . $page . '">Previous</a>
-            </li>';
 
     for ($i = 1; $i <= $totalPages; $i++) {
 
@@ -171,8 +179,23 @@ if ($status == 'fixed') {
 
     $output2 .= '<li class="page-item">
 <a class="page-link pageNumsReport nextBtnReport" id="nextBtnReport" href="?page=' . $page + 1 . '">Next</a>
-</li>';
-}
-$output2 .= '</ul>
+</li></ul>
 </nav>';
-echo json_encode(array('output' => $output, 'output2' => $output2, 'totalPages' => $totalPages, 'status' => $status));
+} else {
+    $output2 = '<nav aria-label="Page navigation example" id="hia"><ul class="pagination paginationReportFixed justify-content-center"><li class="page-item">
+                <a class="page-link pageNumsReportFixed prevBtnReportFixed" id="prevBtnReportFixed" href="?page=' . $page . '">Previous</a>
+            </li>';
+
+    for ($i = 1; $i <= $totalPages; $i++) {
+
+        $output2 .= '<li class="page-item"><a class="page-link pageNumsReportFixed" href="?page=' . $i . '">' . $i . '</a></li>';
+    }
+
+    $output2 .= '<li class="page-item">
+<a class="page-link pageNumsReportFixed nextBtnReportFixed" id="nextBtnReportFixed" href="?page=' . $page + 1 . '">Next</a>
+</li></ul>
+</nav>';
+}
+
+
+echo json_encode(array('output' => $output, 'output2' => $output2, 'totalPages' => $totalPages));

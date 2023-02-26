@@ -47,9 +47,9 @@ if (!$equipement || $equipement == []) {
 <body class="bg-light">
 
 
+    <div id="alertMessage"></div>
     <!-- CONTAINER -->
     <div id="container">
-<div id="alertMessage"></div>
         <?php
 
         if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
@@ -80,6 +80,8 @@ if (!$equipement || $equipement == []) {
     <script src="js/main.js"></script>
     <script src="js/alert.js"></script>
     <script src="js/ajax/ajax.js"></script>
+    <script src="js/ajax/search.ajax.js"></script>
+    <script src="js/ajax/pagination.ajax.js"></script>
 </body>
 
 </html>

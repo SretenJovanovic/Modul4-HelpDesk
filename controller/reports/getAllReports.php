@@ -7,16 +7,14 @@ require "../../model/equipement/equipement.crud.php";
 
 
 
-$result = FailureReportCRUD::getAllReports($conn);
-if (isset($_GET['status']) && !empty($_GET['status'])) {
-    $statusGet = $_GET['status'];
-    $result = FailureReportCRUD::getAllReportsProgressFixed($statusGet, $conn);
-}
-if (isset($_GET['type']) && !empty($_GET['type']) && $_GET['type'] == 'operator') {
-    $type = $_GET['type'];
-    $result = FailureReportCRUD::getAllReports($conn);
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+    $search = $_GET['search'];
+    $result = FailureReportCRUD::searchByIdDate($search, $conn);
+} else if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $sort = $_GET['sort'];
+    $result = FailureReportCRUD::sortByStatus($sort, $conn);
 } else {
-    $type = $_GET['type'];
+    $result = FailureReportCRUD::getAllReports($conn);
 }
 $status = $result[0];
 $totalPages = $result[1];
@@ -128,17 +126,8 @@ if ($allReports == []) {
                     <td>' . $reportDate . '</td>';
         if ($status) {
             $output .= '<td><span class="text-success">Fixed</span></td></tr>';
-        } else if (!$status && $type == 'operator') {
-            $output .= '<td><span class="text-danger">In progress</span></td></tr>';
         } else {
-            $output .= '<td>
-            <form method="POST" class="changeReportStatusForm">
-                <div class="form-check">
-                    <input type="hidden" name="failureId" value="' . $id . '">
-                    <button type="submit" class="btn btn-success pl-5 pr-5" name="submitFix">Fix</button>
-                </div>
-            </form>
-        </td>';
+            $output .= '<td><span class="text-danger">In progress</span></td></tr>';
         }
     endforeach;
 }
@@ -153,47 +142,20 @@ $output2 = '';
 
 $output2 .= '<nav aria-label="Page navigation example" id="hia">';
 $output2 .= '<ul class="pagination paginationReport justify-content-center">';
-if ($type == 'operator') {
-    $output2 .= '<li class="page-item">
+
+$output2 .= '<li class="page-item">
     <a class="page-link pageNumsReport prevBtnReport" id="prevBtnReport" href="?page=' . $page . '">Previous</a>
 </li>';
 
-    for ($i = 1; $i <= $totalPages; $i++) {
+for ($i = 1; $i <= $totalPages; $i++) {
 
-        $output2 .= '<li class="page-item"><a class="page-link pageNumsReport" href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    $output2 .= '<li class="page-item">
-<a class="page-link pageNumsReport nextBtnReport" id="nextBtnReport" href="?page=' . $page + 1 . '">Next</a>
-</li>';
-} else if ($statusGet == 'fixed') {
-    $output2 .= '<li class="page-item">
-    <a class="page-link pageNumsReportFixed prevBtnReportFixed" id="prevBtnReportFixed" href="?page=' . $page . '">Previous</a>
-</li>';
-
-    for ($i = 1; $i <= $totalPages; $i++) {
-
-        $output2 .= '<li class="page-item"><a class="page-link pageNumsReportFixed" href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    $output2 .= '<li class="page-item">
-<a class="page-link pageNumsReportFixed nextBtnReportFixed" id="nextBtnReportFixed" href="?page=' . $page + 1 . '">Next</a>
-</li>';
-} else {
-
-    $output2 .= '<li class="page-item">
-                <a class="page-link pageNumsReport prevBtnReport" id="prevBtnReport" href="?page=' . $page . '">Previous</a>
-            </li>';
-
-    for ($i = 1; $i <= $totalPages; $i++) {
-
-        $output2 .= '<li class="page-item"><a class="page-link pageNumsReport" href="?page=' . $i . '">' . $i . '</a></li>';
-    }
-
-    $output2 .= '<li class="page-item">
-<a class="page-link pageNumsReport nextBtnReport" id="nextBtnReport" href="?page=' . $page + 1 . '">Next</a>
-</li>';
+    $output2 .= '<li class="page-item"><a class="page-link pageNumsReport" href="?page=' . $i . '">' . $i . '</a></li>';
 }
+
+$output2 .= '<li class="page-item">
+<a class="page-link pageNumsReport nextBtnReport" id="nextBtnReport" href="?page=' . $page + 1 . '">Next</a>
+</li>';
+
 $output2 .= '</ul>
 </nav>';
 echo json_encode(array('output' => $output, 'output2' => $output2, 'totalPages' => $totalPages, 'status' => $status));

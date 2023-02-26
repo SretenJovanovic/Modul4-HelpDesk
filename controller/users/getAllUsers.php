@@ -11,6 +11,12 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $status = $result[0];
     $totalPages = $result[1];
     $msg = $result[2];
+} else if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $sort = $_GET['sort'];
+    $result = UserCRUD::sortByType($sort, $conn);
+    $status = $result[0];
+    $totalPages = $result[1];
+    $msg = $result[2];
 } else {
     $result = UserCRUD::getAllUsers($conn);
     $status = $result[0];
@@ -45,7 +51,7 @@ $output = '<table class="table table-sm mb-5">
 </thead>
 <tbody id="getAndSearchUsers">';
 if ($allUsers == []) {
-    $output .= $msg;
+    $output .= '<td colspan="10" class="bg-light text-muted">' . $msg . '</td>';
 } else {
     foreach ($allUsers as $index => $user) :
         $id = $user->getId();

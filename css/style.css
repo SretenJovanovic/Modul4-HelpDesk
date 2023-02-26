@@ -270,9 +270,10 @@
   padding: 9px 0;
 }
 
-
-#alertMessage{
+#alertMessage {
   position: absolute;
-  bottom:10%;
-  left:50%
+  top:50%;
+  width:15%;
+  left:15%;
+  z-index: 4;
 }

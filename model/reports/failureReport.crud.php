@@ -39,7 +39,7 @@ class FailureReportCRUD
         return [$arrayOfReports, $totalPages, $msg];
     }
 
-    public static function getAllReportsProgressFixed($status, mysqli $conn)
+    public static function getAllReportsProgress(mysqli $conn)
     {
         $limit = 8;
 
@@ -49,9 +49,10 @@ class FailureReportCRUD
             $page = 1;
         }
 
+
         $start_from = ($page - 1) * $limit;
 
-        $query = "SELECT * FROM reports WHERE status='$status' LIMIT $start_from,$limit ";
+        $query = "SELECT * FROM reports WHERE status='in progress' LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
         $number_of_result = $result->num_rows;
@@ -66,7 +67,80 @@ class FailureReportCRUD
             }
         }
         // PAGINATION
-        $query = "SELECT * FROM reports WHERE status='$status'";
+        $query = "SELECT * FROM reports WHERE status='in progress'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    public static function getAllReportsFixed(mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM reports WHERE status='fixed' LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status='fixed'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    public static function sortByStatus($sort, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM reports ORDER BY status $sort LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports";
         $result = mysqli_query($conn, $query);
 
         $totalRows = $result->num_rows;
@@ -76,7 +150,190 @@ class FailureReportCRUD
         return [$arrayOfReports, $totalPages, $msg];
     }
 
+    public static function sortByOperatorId($sort, mysqli $conn)
+    {
+        $limit = 8;
 
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM reports WHERE status = 'in progress' ORDER BY operator_id $sort LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status = 'in progress' ORDER BY operator_id $sort";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    public static function sortFixedByOperatorId($sort, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM reports WHERE status = 'fixed' ORDER BY operator_id $sort LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status = 'fixed' ORDER BY operator_id $sort";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    //SEARCH INPUT
+    public static function searchByIdDate($search, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+        $query = "SELECT * FROM reports 
+        WHERE ID LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%' OR CONVERT(fixed_date,DATETIME) LIKE '%$search%'
+        LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg =  'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE ID LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%' OR CONVERT(fixed_date,DATETIME) LIKE '%$search%'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    public static function searchProgressByOperatorIdDate($search, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+        $query = "SELECT * FROM reports 
+        WHERE status='in progress' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'
+        LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg =  'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status='in progress' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
+    public static function searchFixedByOperatorIdDate($search, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+        $query = "SELECT * FROM reports 
+        WHERE status='fixed' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'
+        LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfReports = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There are no reports in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfReports[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM reports WHERE status='fixed' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfReports, $totalPages, $msg];
+    }
     public static function getById($id, mysqli $conn)
     {
 

@@ -5,10 +5,27 @@ require "../../model/equipement/equipement.crud.php";
 
 
 
-$result = EquipementCRUD::getAllEquipement($conn);
-$status = $result[0];
-$totalPages = $result[1];
-$msg = $result[2];
+
+if (isset($_GET['search']) && !empty($_GET['search'])) {
+
+    $search = $_GET['search'];
+    $result = EquipementCRUD::searchByIdNameModel($search, $conn);
+    $status = $result[0];
+    $totalPages = $result[1];
+    $msg = $result[2];
+} else if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+    $sort = $_GET['sort'];
+    $result = EquipementCRUD::sortByName($sort, $conn);
+    $status = $result[0];
+    $totalPages = $result[1];
+    $msg = $result[2];
+} else {
+    $result = EquipementCRUD::getAllEquipement($conn);
+    $status = $result[0];
+    $totalPages = $result[1];
+    $msg = $result[2];
+}
+
 
 
 $page = $_GET['page'];
@@ -37,7 +54,7 @@ $output = '<table class="table table-sm mb-5">
 </thead>
 <tbody id="getAndSearchUsers">';
 if ($allEquipement == []) {
-    $output .= '<td colspan="9" class="bg-light text-muted">' . $msg . '</td>';
+    $output .= '<td colspan="8" class="bg-light text-muted">' . $msg . '</td>';
 } else {
     foreach ($allEquipement as $index => $eq) :
         $id = $eq->getId();

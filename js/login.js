@@ -1,6 +1,6 @@
 $("#login").submit(function (e) {
   e.preventDefault();
-  console.log("login");
+  
   const $form = $(this);
   const serijalizacija = $form.serialize();
   var inputs = document.querySelectorAll("#login input");

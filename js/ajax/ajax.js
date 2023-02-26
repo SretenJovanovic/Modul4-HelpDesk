@@ -58,7 +58,7 @@ $(document).ready(function () {
   $("#registerEquipementForm").submit(function (e) {
     e.preventDefault();
 
-    console.log("radi");
+    
     const $form = $(this);
     const serijalizacija = $form.serialize();
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
     });
 
     request.done(function (response, textStatus, jqXHR) {
-      console.log(jqXHR);
+      
       if (response === "Success") {
         location.href = "home.php?msg=reportInserted";
       } else {

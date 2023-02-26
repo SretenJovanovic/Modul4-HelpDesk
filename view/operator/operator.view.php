@@ -51,6 +51,8 @@
                     Operater ima mogucnost prijave kvara masine odabirom masine iz padajuceg menija i opisivanjem samog kvara.
                     <br> Klikom na "Add report" prijava se salje i ispisuje se na tabu 'List of Reports'. <br>
                     Kada Tehnicar resi kvar, ta prijava prelazi iz statusa "In progress" u status "Fixed" na tabu "List of Reports".
+                <br>
+                    Postoji mogucnost sortiranja i pretrage tabela po nekim parametrima.
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">

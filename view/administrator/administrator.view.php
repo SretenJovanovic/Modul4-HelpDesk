@@ -68,7 +68,8 @@
                 <p class="bg-dark text-white p-5 m-3 mt-5">
                     Administrator ima mogucnost dodavanja novih korisnika, izmenu njihovih podataka i brisanje.<br>
                     Ima mogucnost dodavanja novih masina, izmenu njihovih podataka i brisanje.<br>
-                    Logout dugme je funkcionalno.
+                    Logout dugme je funkcionalno.<br>
+                    Postoji mogucnost sortiranja i pretrage tabela po nekim parametrima.
                 </p>
             </div>
             <div class="tab-pane fade" id="myProfile" role="tabpanel">

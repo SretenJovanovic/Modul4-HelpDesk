@@ -40,7 +40,45 @@ class UserCRUD
         return [$arrayOfUsers, $totalPages, $msg];
     }
 
-    // TODO SEARCH INPUT
+    public static function sortByType($sort, mysqli $conn)
+    {
+        $limit = 8;
+
+        if (isset($_GET['page']) && $_GET['page'] !== '') {
+            $page = $_GET['page'];
+        } else {
+            $page = 1;
+        }
+
+        $start_from = ($page - 1) * $limit;
+
+        $query = "SELECT * FROM users ORDER BY type $sort LIMIT $start_from,$limit ";
+        $result = mysqli_query($conn, $query);
+
+        $number_of_result = $result->num_rows;
+
+        $arrayOfUsers = [];
+        $msg = '';
+        if ($number_of_result == 0) {
+            $msg = 'There is no users in DB.';
+        } else {
+            while ($red = $result->fetch_assoc()) {
+                $arrayOfUsers[] = $red;
+            }
+        }
+        // PAGINATION
+        $query = "SELECT * FROM users";
+        $result = mysqli_query($conn, $query);
+
+        $totalRows = $result->num_rows;
+
+        $totalPages = ceil($totalRows / $limit);
+
+        return [$arrayOfUsers, $totalPages, $msg];
+    }
+
+
+    //SEARCH INPUT
     public static function searchByFirstOrLastName($search, mysqli $conn)
     {
         $limit = 8;
@@ -54,7 +92,7 @@ class UserCRUD
         $start_from = ($page - 1) * $limit;
 
         $query = "SELECT * FROM users 
-        WHERE firstName LIKE '%$search%' OR lastName LIKE '%$search%' OR username LIKE '%$search%'
+        WHERE firstName LIKE '%$search%' OR lastName LIKE '%$search%' OR username LIKE '%$search%' OR ID LIKE '%$search%'
         LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
@@ -70,7 +108,7 @@ class UserCRUD
             }
         }
         // PAGINATION
-        $query = "SELECT * FROM users WHERE username LIKE '%$search%'";
+        $query = "SELECT * FROM users WHERE firstName LIKE '%$search%' OR lastName LIKE '%$search%' OR username LIKE '%$search%' OR ID LIKE '%$search%'";
         $result = mysqli_query($conn, $query);
 
         $totalRows = $result->num_rows;
