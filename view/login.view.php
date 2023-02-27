@@ -1,4 +1,4 @@
-<form class="form-box" action="#" id="login" method="post">
+<form class="form-box" action="../controller/login.controller.php" id="login" method="post">
     <h1>Login</h1>
     <div class="input-box">
         <i class="fa bi bi-envelope-at-fill"></i>

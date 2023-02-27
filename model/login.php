@@ -4,7 +4,7 @@ class Login
 {
     public static function login($username_email, $password, mysqli $conn)
     {
-        $query = "SELECT * FROM users WHERE email='$username_email'OR username = '$username_email' AND password='$password' LIMIT 1;";
+        $query = "SELECT * FROM users WHERE (email='$username_email' OR username = '$username_email') AND password='$password' LIMIT 1;";
         $result =  $conn->query($query);
         if ($result->num_rows === 0) {
             return null;
