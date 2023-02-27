@@ -1,3 +1,4 @@
+<!-- Form for registering new users -->
 <form id="registerUserForm" action="#" method="POST" class="mb-3">
     <h3>Register</h3>
     <div class="form-row">

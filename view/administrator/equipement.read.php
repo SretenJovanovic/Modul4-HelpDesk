@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-light justify-content-between">
     <h3 class="navbar-brand">Equipement List</h3>
-    
+
     <nav class="navbar navbar-light bg-light">
         <button type="button" id="sortEquipementByName" value="ASC" class=" mr-3 mb-3 btn btn-outline-secondary">Sort by Name</button>
         <form class="form-inline">
@@ -14,5 +14,7 @@
     </nav>
 </nav>
 
+<!-- Table show all equipement -->
 <div id="equipementTableDiv"></div>
+<!-- Pagination all equipement -->
 <div id="equipementPaginationDiv"></div>

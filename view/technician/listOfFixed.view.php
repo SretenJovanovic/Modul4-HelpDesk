@@ -6,12 +6,15 @@
         <form class="form-inline">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon3">Search by Id or Year</span>
+                    <span class="input-group-text" id="basic-addon3">Search by Operator Id or Year</span>
                 </div>
                 <input id="searchReportsFixed" class="form-control mr-sm-2" type="text" aria-describedby="basic-addon3" placeholder="Search" aria-label="Search">
             </div>
         </form>
     </nav>
 </nav>
+
+<!-- Table show fixed reports -->
 <div id="listOfFixedDiv"></div>
+<!-- Pagination fixed reports -->
 <div id="fixedPaginationDiv"></div>

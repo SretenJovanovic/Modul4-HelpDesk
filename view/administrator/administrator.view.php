@@ -53,9 +53,10 @@
 <main id="content">
     <div class="col">
         <div class="tab-content" id="v-pills-tabContent">
+
             <!-- PROFILE CONTENT TABS -->
             <div class="tab-pane fade show active" id="description" role="tabpanel">
-            <h3 class=" text-center bg-dark text-white p-5 m-3 mt-5">
+                <h3 class=" text-center bg-dark text-white p-5 m-3 mt-5">
                     ADMINISTRATOR
                 </h3>
                 <p class="bg-dark text-white p-5 m-3 mt-5">
@@ -83,19 +84,19 @@
             <div class="tab-pane fade" id="addUser" role="tabpanel">
                 <?php include_once('view/administrator/users.add.php'); ?>
             </div>
+
             <!-- EQUIPEMENT CONTENT TABS -->
             <div class="tab-pane fade show" id="listOfEquipement" role="tabpanel">
                 <?php include_once('view/administrator/equipement.read.php'); ?>
-
             </div>
             <div class="tab-pane fade" id="addEquipement" role="tabpanel">
                 <?php include_once('view/administrator/equipement.add.php'); ?>
-
             </div>
         </div>
     </div>
 </main>
 
 
+<!-- Administrator type scripts -->
 <script src="js/administrator.js"></script>
 <script src="js/ajax/getAllUsersEquipement.ajax.js"></script>

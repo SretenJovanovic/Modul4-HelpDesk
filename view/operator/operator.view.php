@@ -66,9 +66,7 @@
             </div>
             <div class="tab-pane fade" id="addReport" role="tabpanel">
                 <h3>Add Report</h3>
-                <?php
-                include_once('view/operator/failureReport.view.php');
-                ?>
+                <?php include_once('view/operator/failureReport.view.php'); ?>
             </div>
 
         </div>

@@ -1,3 +1,4 @@
+<!-- Form for registering new reports -->
 <form action="#" method="POST" id="addReportForm">
     <div class="form-row">
         <div class="form-group col-md-1">
@@ -14,29 +15,27 @@
         <div class="form-group col-md-4">
             <label for="equipement">Equipement</label>
 
-            <?php
-            if ($allEquipement == "There is no equipement") {
-            ?>
+            <?php if ($allEquipement == "There is no equipement") { ?>
+
                 <select class="form-control" name="equipementID" id="equipementID" disabled>
                     <option value="">There is no equipement</option>
-                <?php
-            } else {
-                ?>
+
+                <?php } else { ?>
+
                     <select class="form-control" name="equipementID" id="equipementID">
-                        <?php
-                        foreach ($allEquipement as $equipement) :
+                        <?php foreach ($allEquipement as $equipement) :
                             $eqInfo = $equipement->getId() . ' '
                                 . $equipement->getName() . ' '
                                 . $equipement->getModel() . ' '
-                                . $equipement->getProcess();
-                        ?>
+                                . $equipement->getProcess(); ?>
+
                             <option value="<?php echo $equipement->getId(); ?>">
                                 <?php echo $eqInfo; ?>
                             </option>
-                    <?php
-                        endforeach;
-                    };
-                    ?>
+
+                    <?php endforeach;
+                    }; ?>
+
                     </select>
         </div>
     </div>

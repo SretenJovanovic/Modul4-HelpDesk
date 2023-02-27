@@ -46,12 +46,13 @@ if (!$equipement || $equipement == []) {
 
 <body class="bg-light">
 
-
+    <!-- Alert messages home page  -->
     <div id="alertMessage"></div>
+
     <!-- CONTAINER -->
     <div id="container">
         <?php
-
+    // Checking which user type is logged
         if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
             $type = $_SESSION['loggedUser']->getType();
             if ($type == 'administrator') {

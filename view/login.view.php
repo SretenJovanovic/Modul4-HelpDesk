@@ -1,3 +1,4 @@
+<!-- Login form -->
 <form class="form-box" action="../controller/login.controller.php" id="login" method="post">
     <h1>Login</h1>
     <div class="input-box">
@@ -16,6 +17,7 @@
     <div id="msg"></div>
 </form>
 
+<!-- Script for login form -->
 <script>
   function hideShowPassword(){
   var x = document.getElementById("password");

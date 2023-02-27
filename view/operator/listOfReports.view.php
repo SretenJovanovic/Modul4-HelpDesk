@@ -13,5 +13,8 @@
         </form>
     </nav>
 </nav>
+
+<!-- Table show all reports -->
 <div id="reportsTableDiv"></div>
+<!-- Pagination all reports -->
 <div id="paginationReportDiv"></div>

@@ -272,7 +272,7 @@ class FailureReportCRUD
 
         $start_from = ($page - 1) * $limit;
         $query = "SELECT * FROM reports 
-        WHERE status='in progress' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'
+        WHERE status='in progress' AND (operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%')
         LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
@@ -288,7 +288,7 @@ class FailureReportCRUD
             }
         }
         // PAGINATION
-        $query = "SELECT * FROM reports WHERE status='in progress' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'";
+        $query = "SELECT * FROM reports WHERE status='in progress' AND (operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%')";
         $result = mysqli_query($conn, $query);
 
         $totalRows = $result->num_rows;
@@ -309,7 +309,7 @@ class FailureReportCRUD
 
         $start_from = ($page - 1) * $limit;
         $query = "SELECT * FROM reports 
-        WHERE status='fixed' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'
+        WHERE status='fixed' AND (operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%')
         LIMIT $start_from,$limit ";
         $result = mysqli_query($conn, $query);
 
@@ -325,7 +325,7 @@ class FailureReportCRUD
             }
         }
         // PAGINATION
-        $query = "SELECT * FROM reports WHERE status='fixed' AND operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%'";
+        $query = "SELECT * FROM reports WHERE status='fixed' AND (operator_id LIKE '%$search%' OR CONVERT(report_date,DATETIME) LIKE '%$search%')";
         $result = mysqli_query($conn, $query);
 
         $totalRows = $result->num_rows;

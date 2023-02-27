@@ -15,5 +15,7 @@
 </nav>
 
 
+<!-- Table show all users -->
 <div id="usersTableDiv"></div>
+<!-- Pagination all users -->
 <div id="paginationDiv"></div>

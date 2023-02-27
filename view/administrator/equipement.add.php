@@ -1,5 +1,6 @@
-<h3>Add Equipement</h3>
+<!-- Form for registering new equipement -->
 <form action="#" method="POST" id="registerEquipementForm">
+    <h3>Add Equipement</h3>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label for="name">Name</label>

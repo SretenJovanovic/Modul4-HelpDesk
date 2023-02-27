@@ -345,16 +345,16 @@ $("#sortReportsProgressByOperatorId").on("click", function (e) {
   });
 });
 // SEARCH REPORTS FIXED BY ID OR DATE
-$("#searchReportsProgress").on("keyup", function (e) {
+$("#searchReportsFixed").on("keyup", function (e) {
   var search = e.target.value;
   // Setting initial page number to 1
 
-  var statusProgress = "in progress";
+  var statusFixed = "fixed";
   page = 1;
   request = $.ajax({
     url: "controller/reports/getAllReportsTechnician.php",
     type: "get",
-    data: { page: page, status: statusProgress, search: search },
+    data: { page: page, status: statusFixed, search: search },
   });
 
   request.done(function (response, textStatus, jqXHR) {
@@ -362,23 +362,21 @@ $("#searchReportsProgress").on("keyup", function (e) {
       var result = jQuery.parseJSON(response);
       // Inserting data to usersTableDiv
 
-      getReportedDiv = document.getElementById("listOfReportedDiv");
-      getReportedDiv.innerHTML = result["output"];
+      getFixedDiv = document.getElementById("listOfFixedDiv");
+      getFixedDiv.innerHTML = result["output"];
       // Creating pagination
-      getReportedPaginationDiv = document.getElementById(
-        "reportedPaginationDiv"
-      );
-      getReportedPaginationDiv.innerHTML = result["output2"];
+      getFixedPaginationDiv = document.getElementById("fixedPaginationDiv");
+      getFixedPaginationDiv.innerHTML = result["output2"];
 
       // Adding ACTIVE class to link
-      addActiveClass(page, "pageNumsReport");
+      addActiveClass(page, "pageNumsFixed");
 
       const totalPages = result["totalPages"];
-      setNextPage(page, totalPages, "nextBtnReport");
+      setNextPage(page, totalPages, "nextBtnFixed");
       // Set prevBtn to page+1 number
-      setPrevPage(page, "prevBtnReport");
+      setPrevPage(page, "prevBtnFixed");
 
-      paginationTechnician(search);
+      paginationTechnicianFixed(search);
 
       // Request after submiting change report status form
       changeReportStatus();
