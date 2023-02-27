@@ -1,3 +1,9 @@
+<?php
+session_start();
+  if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
+    header('Location:home.php');
+  }
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +27,7 @@
 
 <body class="bg-dark">
 
-
+  
   <svg id="wave" style="position:absolute;bottom:0;z-index:-1;transform:rotate(0deg); transition: 0.3s" viewBox="0 0 1440 490" version="1.1" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
@@ -55,7 +61,7 @@
   <script src="js/main.js"></script>
   <script src="js/alert.js"></script>
   <script src="js/login.js"></script>
-  
+
 </body>
 
 </html>
